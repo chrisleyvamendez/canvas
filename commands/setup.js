@@ -6,7 +6,7 @@ module.exports = {
     .setDescription("/config [classid#1] [classid#2] [classid#3] ")
     .addStringOption(new SlashCommandStringOption()
       .setName("class-ids")
-      .setDescription("canvas class id")
+      .setDescription("canvas class id, any invalid id will be removed from processing")
       .setRequired(true)
     ),
   async execute(inter) {
