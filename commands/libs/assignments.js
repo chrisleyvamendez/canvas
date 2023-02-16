@@ -1,17 +1,6 @@
-const axios = require('axios')
-const getName = require('../libs/getName')
+const axios = require('axios');
+import {process} from './process';
 
-
-
-export const Classes = async (idArr) => {
-    const apiUrl = `https://csus.instructure.com/api/v1/courses/`
-
-
-    for (const id of idArr) {
-
-    }
-
-}
 
 
 
