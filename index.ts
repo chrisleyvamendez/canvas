@@ -1,14 +1,14 @@
 const fs = require("node:fs");
 const path = require("node:path");
-
 require("dotenv").config();
+
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
-const appId = process.env.APP_ID;
-const publicKey = process.env.PUBLIC_KEY;
-const token = process.env.BOT_TOKEN;
+const clientId:string = process.env.CLIENT_ID;
+const clientSecret:string = process.env.CLIENT_SECRET;
+const appId:string  = process.env.APP_ID;
+const publicKey:string = process.env.PUBLIC_KEY;
+const token:string = process.env.BOT_TOKEN;
 
 const client = new Client({
   intents: [
