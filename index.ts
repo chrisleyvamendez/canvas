@@ -1,34 +1,42 @@
+import { DiscordAPIError } from "discord.js";
+import { classes } from './commands/libs/courses'
+
 const fs = require("node:fs");
 const path = require("node:path");
 require("dotenv").config();
 
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 
-const clientId:string = process.env.CLIENT_ID;
-const clientSecret:string = process.env.CLIENT_SECRET;
-const appId:string  = process.env.APP_ID;
-const publicKey:string = process.env.PUBLIC_KEY;
-const token:string = process.env.BOT_TOKEN;
+const token: string = "MTA3NDM0NDg5NTM2MTMzMTMwMQ.Gv2673.OxbExYJUkg_qfZz4WX51xLv5Pz1f6GH-ty-CYs";
 
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.DirectMessages,
-		GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.MessageContent,
   ],
 });
 
-client.login(token);
+client.login(token).then(async r => {
+  console.log("client logged : " + r);
+  const courses = await classes();
+  for (const course of courses){
+    console.log(course.course_code);
+  }
+})
 
-client.once(Events.ClientReady, (c) => {
-  // once the client is ready, what are we going to do
+client.once(Events.ClientReady, (client) => {
+    client.channels.fetch('1070865825596194892')
+    .then(channel => {
+        channel.send("Hello here!");
+    })
 });
 
 client.commands = new Collection();
 
 const cmd_path = path.join(__dirname, "commands"); //dir name == /commands
-const cmd_files = fs.readdirSync(cmd_path).filter((f) => f.endsWith(".js"));
+const cmd_files = fs.readdirSync(cmd_path).filter((f: string) => f.endsWith(".js"));
 
 for (const f of cmd_files) {
   const f_path = path.join(cmd_path, f);
@@ -55,10 +63,17 @@ client.on(Events.InteractionCreate, async (inter) => {
   try {
     const data = await command.execute(inter);
     console.log(data);
-    
+
+
   } catch (e) {
-    console.error(e);
-    await inter.reply({ content: "error executing this command :(" });
+    if (e instanceof DiscordAPIError) {
+      await inter.reply({content: "sorry our discord bot timed out, try again later"})
+    } else {
+      console.error(e);
+      await inter.reply({ content: "error executing this command :(" });
+
+
+    }
   }
 
 });

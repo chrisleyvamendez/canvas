@@ -1,21 +1,18 @@
 const axios = require("axios");
 
-const ProcessIDs = async (nums: Array<String>): Promise<any> => {
-    const TOKEN:string = String(process.env.CANVAS_TOKEN);
+export async function ProcessIDs (nums: Array<any>){
+    const tkn:string = 'MTA3NDM0NDg5NTM2MTMzMTMwMQ.Gv2673.OxbExYJUkg_qfZz4WX51xLv5Pz1f6GH-ty-CYs'
+    const canvas_tkn:string = '11299~aAHiTClQDxCZ43sUm0l9l5fHWtxMmaDy8D24PffKzrNrNdO7HXQKBO1dLuLkeDpz'
     if (nums.length === 0) return null;
-    const data = nums.map(id => {
-        axios.get(`https://csus.instructure.com/api/v1/courses/` + id,{
-            headers: {Authorization: ` Bearer ${TOKEN}`}
-        }).then(response =>{
+    // [['Math26B',{...}],['Stat129', {...}]];
+    return nums.map(id => {
+        axios.get(`https://csus.instructure.com/api/v1/courses/` + id, {
+            headers: {Authorization: ` Bearer ${canvas_tkn}`}
+        }).then((response: { data: { name: any; }; }) => {
+            console.log(response.data);
             return [response.data.name, response.data];
-        }).catch(e => {
+        }).catch((e: any) => {
             console.error(e);
         });
-    })
-    // [['Math26B',{...}],['Stat129', {...}]];
-    return data;
-}
-
-module.exports = { 
-    ProcessIDs
+    });
 }
