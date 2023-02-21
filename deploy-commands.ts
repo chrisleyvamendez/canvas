@@ -3,7 +3,7 @@ const { REST } = require('@discordjs/rest')
 const fs = require('node:fs');
 
 const clientId = process.env.CLIENT_ID;
-const tkn= 'MTA3NDM0NDg5NTM2MTMzMTMwMQ.Gv2673.OxbExYJUkg_qfZz4WX51xLv5Pz1f6GH-ty-CYs'
+const tkn: string = 'MTA3NDM0NDg5NTM2MTMzMTMwMQ.G-Xu_h.uLZ-r_lyvYrQdMpB6qJRxxeZziEfivaDYtzbI4'
 
 
 

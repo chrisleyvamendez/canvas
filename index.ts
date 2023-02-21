@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 
-const token: string = "MTA3NDM0NDg5NTM2MTMzMTMwMQ.Gv2673.OxbExYJUkg_qfZz4WX51xLv5Pz1f6GH-ty-CYs";
+const token: string = 'MTA3NDM0NDg5NTM2MTMzMTMwMQ.G-Xu_h.uLZ-r_lyvYrQdMpB6qJRxxeZziEfivaDYtzbI4'
 
 const client = new Client({
   intents: [

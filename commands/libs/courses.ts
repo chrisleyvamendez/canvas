@@ -17,7 +17,7 @@ export const classes = async (apiKey= canvas_tkn, school = 'csus') => {
     courses = courses.filter(course => {
         const rule = !(/WPJ/gi.test(course.name) || /WPJ/gi.test(course.course_code))
         const createdAt = new Date(course.created_at);
-        return rule && createdAt >= date;
+        return rule;
     })
     return courses;
 }
